@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_nav"
+    app:startDestination="@id/genreListFragment">
+
+    <fragment
+        android:id="@+id/genreListFragment"
+        android:name="id.indocyber.moviedbassigment.fragment.genre.GenreListFragment"
+        android:label="GenreListFragment" >
+        <action
+            android:id="@+id/toMovieList"
+            app:destination="@id/movieListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/movieListFragment"
+        android:name="id.indocyber.moviedbassigment.fragment.movie.MovieListFragment"
+        android:label="MovieListFragment">
+        <argument android:name="genres" app:argType="string"/>
+        <action
+            android:id="@+id/toDetails"
+            app:destination="@id/detailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="id.indocyber.moviedbassigment.fragment.detail.DetailFragment"
+        android:label="DetailFragment">
+        <argument android:name="movieId" app:argType="string"/>
+        <action
+            android:id="@+id/toVideo"
+            app:destination="@id/videoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/videoFragment"
+        android:name="id.indocyber.moviedbassigment.fragment.video.VideoFragment"
+        android:label="VideoFragment">
+        <argument android:name="movieId" app:argType="string"/>
+        <argument android:name="posterPath" app:argType="string"/>
+    </fragment>
+</navigation>

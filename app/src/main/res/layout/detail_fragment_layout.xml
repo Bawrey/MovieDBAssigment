@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="detail"
+            type="id.indocyber.common.entity.movie_detail.MovieDetailResponse" />
+
+        <import type="id.indocyber.api_service.Constants" />
+
+        <variable
+            name="genres"
+            type="String" />
+
+        <variable
+            name="vm"
+            type="id.indocyber.moviedbassigment.view_model.DetailViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:custom="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/background"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            custom:loadImage="@{Constants.BASE_POSTER_PATH+detail.posterPath}" />
+
+        <LinearLayout
+            android:id="@+id/details"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/blackTransparent"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="150dp"
+                android:layout_height="250dp">
+
+                <ImageView
+                    android:layout_width="150dp"
+                    android:layout_height="250dp"
+                    android:layout_margin="10dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    custom:loadImage="@{Constants.BASE_POSTER_PATH+detail.posterPath}" />
+
+                <ImageView
+                    android:id="@+id/trailer"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@color/blackTransparent"
+                    android:src="@drawable/ic_baseline_play_circle_filled_24"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/trailer"
+                    android:theme="@style/outlineForBody"
+                    android:background="@color/blackTransparent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/trailer" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@{String.format(`%s (%s)`,detail.title,detail.releaseDate.substring(0,4))}"
+                        android:theme="@style/outlineForHead" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{String.format(`%s(%s) • %s`,detail.releaseDate,detail.productionCompanies[0].originCountry,genres)}"
+                        android:theme="@style/outlineForBody" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@{detail.tagline}"
+                        android:textStyle="italic"
+                        android:theme="@style/outlineForBody" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@{String.format(`Overview:\n%s`,detail.overview)}"
+                        android:theme="@style/outlineForBody" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@{String.format(`User Score: %.2f/%,d ratings`,detail.voteAverage,detail.voteCount)}"
+                        android:theme="@style/outlineForBody" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@{String.format(`Revenue: $%,d`,detail.revenue)}"
+                        android:theme="@style/outlineForBody" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@{String.format(`Runtime: %d h, %d m`,detail.runtime/60,detail.runtime%60)}"
+                        android:theme="@style/outlineForBody" />
+
+
+                </LinearLayout>
+            </ScrollView>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/reviewText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/reviews"
+            android:textAlignment="center"
+            android:theme="@style/outlineForHead"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/details" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/reviewList"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/reviewText" />
+
+        <ProgressBar
+            android:id="@+id/loadingBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/retryButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/retry"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
