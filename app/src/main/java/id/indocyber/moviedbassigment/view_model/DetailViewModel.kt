@@ -23,7 +23,7 @@ class DetailViewModel @Inject constructor(
 ) : BaseViewModel(application) {
 
     val detailData = MutableLiveData<AppResponse<MovieDetailResponse>>()
-    val reviewData = MutableLiveData<PagingData<Review>>()
+    var reviewData = MutableLiveData<PagingData<Review>>()
 
     fun loadData(movieId: String) {
         viewModelScope.launch {
@@ -35,10 +35,14 @@ class DetailViewModel @Inject constructor(
     }
 
     fun loadSecondData(movieId: String) {
-        viewModelScope.launch {
-            getMovieReviewPagingUseCase.invoke(movieId).flow.collect {
-                reviewData.postValue(it)
+        if (reviewData.value == null) {
+            viewModelScope.launch {
+                getMovieReviewPagingUseCase.invoke(movieId).flow.collect {
+                    reviewData.postValue(it)
+                }
             }
+        } else {
+            reviewData.postValue(reviewData.value)
         }
     }
 

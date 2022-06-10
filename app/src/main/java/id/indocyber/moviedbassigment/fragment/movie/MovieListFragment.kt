@@ -33,18 +33,28 @@ class MovieListFragment : BaseFragment<MovieListViewModel, MovieFragmentLayoutBi
         adapter.addLoadStateListener {
             if (it.refresh is LoadState.Error && adapter.itemCount == 0) {
                 binding.movieList.visibility = View.GONE
+                binding.retryButton.visibility = View.GONE
+                binding.noVideosText.visibility = View.GONE
+                binding.noVideosImage.visibility = View.GONE
                 binding.retryButton.visibility = View.VISIBLE
                 binding.loadingBar.visibility = View.GONE
             } else if (it.refresh is LoadState.Loading && adapter.itemCount == 0) {
                 binding.movieList.visibility = View.VISIBLE
                 binding.retryButton.visibility = View.GONE
+                binding.retryButton.visibility = View.GONE
+                binding.noVideosText.visibility = View.GONE
+                binding.noVideosImage.visibility = View.GONE
                 binding.loadingBar.visibility = View.VISIBLE
             } else if (it.refresh is LoadState.NotLoading && adapter.itemCount != 0) {
                 binding.movieList.visibility = View.VISIBLE
+                binding.noVideosText.visibility = View.GONE
+                binding.noVideosImage.visibility = View.GONE
                 binding.retryButton.visibility = View.GONE
                 binding.loadingBar.visibility = View.GONE
             } else if (it.refresh is LoadState.NotLoading && adapter.itemCount == 0) {
                 binding.movieList.visibility = View.VISIBLE
+                binding.noVideosText.visibility = View.VISIBLE
+                binding.noVideosImage.visibility = View.VISIBLE
                 binding.retryButton.visibility = View.GONE
                 binding.loadingBar.visibility = View.GONE
             }

@@ -4,4 +4,7 @@
     <string name="trailer">Trailer</string>
     <string name="retry">Retry</string>
     <string name="poster_background">Poster Background</string>
+    <string name="no_video_available">No Video Available</string>
+    <string name="no_reviews_available">No Reviews Available</string>
+    <string name="user_avatar_image">User Avatar Image</string>
 </resources>

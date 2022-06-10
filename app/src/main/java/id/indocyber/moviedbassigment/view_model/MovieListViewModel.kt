@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
+import androidx.paging.cachedIn
 import dagger.hilt.android.lifecycle.HiltViewModel
 import id.indocyber.api_service.use_case.GetMovieListPagingUseCase
 import id.indocyber.common.base.BaseViewModel
@@ -18,13 +19,17 @@ class MovieListViewModel @Inject constructor(
     private val getMovieListPagingUseCase: GetMovieListPagingUseCase
 ) : BaseViewModel(application) {
 
-    val movieData = MutableLiveData<PagingData<Movie>>()
+    var movieData = MutableLiveData<PagingData<Movie>>()
 
     fun loadData(genreIds: String) {
-        viewModelScope.launch {
-            getMovieListPagingUseCase.invoke(genreIds).flow.collect {
-                movieData.postValue(it)
+        if(movieData.value==null){
+            viewModelScope.launch {
+                getMovieListPagingUseCase.invoke(genreIds).flow.cachedIn(this).collect {
+                    movieData.postValue(it)
+                }
             }
+        }else{
+            movieData.postValue(movieData.value)
         }
     }
 

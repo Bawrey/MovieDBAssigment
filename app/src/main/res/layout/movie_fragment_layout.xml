@@ -13,6 +13,30 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <ImageView
+            android:id="@+id/noVideosImage"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@mipmap/no_movie"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/noVideosText"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:background="@color/blackTransparent"
+            android:text="@string/no_video_available"
+            android:textAlignment="center"
+            android:theme="@style/outlineForBody"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/noVideosImage" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/movieList"
             android:layout_width="match_parent"

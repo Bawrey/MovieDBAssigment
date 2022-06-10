@@ -1,7 +1,6 @@
 package id.indocyber.moviedbassigment.fragment.detail
 
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import androidx.paging.LoadState
@@ -30,18 +29,26 @@ class DetailFragment : BaseFragment<DetailViewModel, DetailFragmentLayoutBinding
         with(binding) {
             adapter.addLoadStateListener {
                 if (it.refresh is LoadState.Error && adapter.itemCount == 0) {
+                    noReviewImage.visibility = View.GONE
+                    noReviewsText.visibility = View.GONE
                     reviewList.visibility = View.GONE
                     retryButton.visibility = View.VISIBLE
                     loadingBar.visibility = View.GONE
                 } else if (it.refresh is LoadState.Loading && adapter.itemCount == 0) {
+                    noReviewImage.visibility = View.GONE
+                    noReviewsText.visibility = View.GONE
                     reviewList.visibility = View.VISIBLE
                     retryButton.visibility = View.GONE
                     loadingBar.visibility = View.VISIBLE
                 } else if (it.refresh is LoadState.NotLoading && adapter.itemCount != 0) {
+                    noReviewImage.visibility = View.GONE
+                    noReviewsText.visibility = View.GONE
                     reviewList.visibility = View.VISIBLE
                     retryButton.visibility = View.GONE
                     loadingBar.visibility = View.GONE
                 } else if (it.refresh is LoadState.NotLoading && adapter.itemCount == 0) {
+                    noReviewImage.visibility = View.VISIBLE
+                    noReviewsText.visibility = View.VISIBLE
                     reviewList.visibility = View.VISIBLE
                     retryButton.visibility = View.GONE
                     loadingBar.visibility = View.GONE
