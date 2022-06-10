@@ -4,7 +4,6 @@ import id.indocyber.api_service.service.GenreListService
 import id.indocyber.common.AppResponse
 import id.indocyber.common.entity.genre.Genre
 import kotlinx.coroutines.flow.flow
-import retrofit2.Response
 
 class GetGenreListUseCase(private val genreListService: GenreListService) {
     operator fun invoke() = flow<AppResponse<List<Genre>>> {

@@ -5,7 +5,6 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import id.indocyber.api_service.service.MovieListService
-import id.indocyber.common.entity.genre.Genre
 import id.indocyber.common.entity.movie.Movie
 
 class MovieListPagingDataSource(
