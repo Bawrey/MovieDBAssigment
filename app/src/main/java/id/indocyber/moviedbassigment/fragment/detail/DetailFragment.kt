@@ -63,7 +63,7 @@ class DetailFragment : BaseFragment<DetailViewModel, DetailFragmentLayoutBinding
                     binding.loadingBar.visibility = View.GONE
                 }
                 is AppResponse.AppResponseError -> {
-                    Toast.makeText(context, appResponse.e?.message, Toast.LENGTH_LONG).show()
+                    errorAlertDialog(appResponse.e?.message.orEmpty())
                     binding.details.visibility = View.GONE
                     binding.background.visibility = View.GONE
                     binding.retryButton.visibility = View.VISIBLE

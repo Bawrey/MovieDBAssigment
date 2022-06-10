@@ -9,7 +9,6 @@ import id.indocyber.api_service.use_case.GetMovieDetailUseCase
 import id.indocyber.api_service.use_case.GetMovieReviewPagingUseCase
 import id.indocyber.common.AppResponse
 import id.indocyber.common.base.BaseViewModel
-import id.indocyber.common.base.SingleLiveEvent
 import id.indocyber.common.entity.movie_detail.MovieDetailResponse
 import id.indocyber.common.entity.movie_review.Review
 import id.indocyber.moviedbassigment.fragment.detail.DetailFragmentDirections
@@ -19,8 +18,8 @@ import javax.inject.Inject
 @HiltViewModel
 class DetailViewModel @Inject constructor(
     application: Application,
-    val getMovieDetailUseCase: GetMovieDetailUseCase,
-    val getMovieReviewPagingUseCase: GetMovieReviewPagingUseCase
+    private val getMovieDetailUseCase: GetMovieDetailUseCase,
+    private val getMovieReviewPagingUseCase: GetMovieReviewPagingUseCase
 ) : BaseViewModel(application) {
 
     val detailData = MutableLiveData<AppResponse<MovieDetailResponse>>()
@@ -32,9 +31,10 @@ class DetailViewModel @Inject constructor(
                 detailData.postValue(it)
             }
         }
+
     }
 
-    fun loadSecondData(movieId: String){
+    fun loadSecondData(movieId: String) {
         viewModelScope.launch {
             getMovieReviewPagingUseCase.invoke(movieId).flow.collect {
                 reviewData.postValue(it)

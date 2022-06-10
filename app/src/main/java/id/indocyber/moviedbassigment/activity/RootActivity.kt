@@ -2,7 +2,6 @@ package id.indocyber.moviedbassigment.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.fragment.NavHostFragment
 import dagger.hilt.android.AndroidEntryPoint
 import id.indocyber.moviedbassigment.R
 

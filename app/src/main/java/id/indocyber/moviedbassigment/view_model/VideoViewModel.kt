@@ -14,14 +14,14 @@ import javax.inject.Inject
 @HiltViewModel
 class VideoViewModel @Inject constructor(
     application: Application,
-    val getMovieVideoUseCase: GetMovieVideoUseCase
+    private val getMovieVideoUseCase: GetMovieVideoUseCase
 ) : BaseViewModel(application) {
 
     val videoData = MutableLiveData<AppResponse<Video>>()
 
-    fun loadData(movieId:String){
+    fun loadData(movieId: String) {
         viewModelScope.launch {
-            getMovieVideoUseCase.invoke(movieId).collect{
+            getMovieVideoUseCase.invoke(movieId).collect {
                 videoData.postValue(it)
             }
         }

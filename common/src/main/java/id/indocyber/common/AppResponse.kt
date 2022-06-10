@@ -11,13 +11,9 @@ open class AppResponse<T> {
         fun <T> loading() = AppResponseLoading<T>()
     }
 
-    class AppResponseError<T>(val e: Throwable?) : AppResponse<T>() {
+    class AppResponseError<T>(val e: Throwable?) : AppResponse<T>()
 
-    }
+    class AppResponseSuccess<T>(val data: T) : AppResponse<T>()
 
-    class AppResponseSuccess<T>(val data: T) : AppResponse<T>() {
-
-    }
-
-    class AppResponseLoading<T>() : AppResponse<T>()
+    class AppResponseLoading<T> : AppResponse<T>()
 }

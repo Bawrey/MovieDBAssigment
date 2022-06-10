@@ -7,10 +7,8 @@ import androidx.paging.PagingData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import id.indocyber.api_service.use_case.GetMovieListPagingUseCase
 import id.indocyber.common.base.BaseViewModel
-import id.indocyber.common.entity.genre.Genre
 import id.indocyber.common.entity.movie.Movie
 import id.indocyber.moviedbassigment.fragment.movie.MovieListFragmentDirections
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 

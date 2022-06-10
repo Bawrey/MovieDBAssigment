@@ -9,7 +9,6 @@ import dagger.hilt.components.SingletonComponent
 import id.indocyber.api_service.RetrofitClient
 import id.indocyber.api_service.service.*
 import retrofit2.Retrofit
-import retrofit2.create
 import javax.inject.Singleton
 
 @Module
@@ -23,23 +22,23 @@ class ApiModule {
 
     @Provides
     @Singleton
-    fun provideGenreListService(retrofit: Retrofit) = retrofit.create(GenreListService::class.java)
+    fun provideGenreListService(retrofit: Retrofit): GenreListService = retrofit.create(GenreListService::class.java)
 
     @Provides
     @Singleton
-    fun provideMovieListService(retrofit: Retrofit) = retrofit.create(MovieListService::class.java)
+    fun provideMovieListService(retrofit: Retrofit): MovieListService = retrofit.create(MovieListService::class.java)
 
     @Provides
     @Singleton
-    fun provideMovieDetailService(retrofit: Retrofit) = retrofit.create(MovieDetailService::class.java)
+    fun provideMovieDetailService(retrofit: Retrofit): MovieDetailService = retrofit.create(MovieDetailService::class.java)
 
     @Provides
     @Singleton
-    fun provideMovieReviewService(retrofit: Retrofit) = retrofit.create(MovieReviewService::class.java)
+    fun provideMovieReviewService(retrofit: Retrofit): MovieReviewService = retrofit.create(MovieReviewService::class.java)
 
     @Provides
     @Singleton
-    fun provideMovieVideoService(retrofit: Retrofit) = retrofit.create(MovieVideoService::class.java)
+    fun provideMovieVideoService(retrofit: Retrofit): MovieVideoService = retrofit.create(MovieVideoService::class.java)
 
 
 }

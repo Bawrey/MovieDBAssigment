@@ -5,15 +5,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.paging.LoadState
 import androidx.paging.LoadStateAdapter
-import androidx.paging.PagingState
 import androidx.recyclerview.widget.RecyclerView
 import id.indocyber.moviedbassigment.databinding.LoadItemLayoutBinding
 
 class PagingLoadStateAdapter(val onRetry: () -> Unit) :
     LoadStateAdapter<PagingLoadStateAdapter.PagingLoadStateViewHolder>() {
     class PagingLoadStateViewHolder(val binding: LoadItemLayoutBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-    }
+        RecyclerView.ViewHolder(binding.root)
 
     override fun onBindViewHolder(holder: PagingLoadStateViewHolder, loadState: LoadState) {
         when (loadState) {

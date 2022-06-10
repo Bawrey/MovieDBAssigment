@@ -1,7 +1,6 @@
 package id.indocyber.moviedbassigment.fragment.genre
 
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.selection.SelectionPredicates
 import androidx.recyclerview.selection.SelectionTracker
@@ -17,7 +16,7 @@ import id.indocyber.moviedbassigment.view_model.GenreListViewModel
 class GenreListFragment : BaseFragment<GenreListViewModel, GenreFragmentLayoutBinding>() {
     override val vm: GenreListViewModel by viewModels()
     override val layoutResourceId: Int = R.layout.genre_fragment_layout
-    private val adapter = GenreListAdapter() {
+    private val adapter = GenreListAdapter {
         vm.selection?.isSelected(it) ?: false
     }
 
@@ -39,7 +38,7 @@ class GenreListFragment : BaseFragment<GenreListViewModel, GenreFragmentLayoutBi
                     binding.retryButton.visibility = View.VISIBLE
                     binding.genreList.visibility = View.GONE
                     binding.loadingBar.visibility = View.GONE
-                    Toast.makeText(context, it.e?.message, Toast.LENGTH_LONG).show()
+                    errorAlertDialog(it.e?.message.orEmpty())
                 }
                 is AppResponse.AppResponseLoading -> {
                     binding.loadingBar.visibility = View.VISIBLE
@@ -60,7 +59,7 @@ class GenreListFragment : BaseFragment<GenreListViewModel, GenreFragmentLayoutBi
     }
 
     private fun createTracker() =
-        SelectionTracker.Builder<Long>(
+        SelectionTracker.Builder(
             this@GenreListFragment::class.java.name,
             binding.genreList,
             GenreItemKeyProvider(adapter),

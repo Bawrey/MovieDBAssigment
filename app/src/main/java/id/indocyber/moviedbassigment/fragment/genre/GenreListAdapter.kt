@@ -1,6 +1,5 @@
 package id.indocyber.moviedbassigment.fragment.genre
 
-import android.graphics.Rect
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.ViewGroup
@@ -10,9 +9,7 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import id.indocyber.common.entity.genre.Genre
-import id.indocyber.moviedbassigment.R
 import id.indocyber.moviedbassigment.databinding.GenreItemLayoutBinding
-import kotlin.random.Random
 
 class GenreListAdapter(val isSelected: (Long) -> Boolean) :
     RecyclerView.Adapter<GenreListAdapter.GenreListViewHolder>() {
@@ -72,7 +69,7 @@ class GenreListAdapter(val isSelected: (Long) -> Boolean) :
 
 }
 
-class GenreItemKeyProvider(val genreListAdapter: GenreListAdapter) :
+class GenreItemKeyProvider(private val genreListAdapter: GenreListAdapter) :
     ItemKeyProvider<Long>(SCOPE_CACHED) {
     override fun getKey(position: Int): Long =
         genreListAdapter.data.currentList[position].id.toLong()

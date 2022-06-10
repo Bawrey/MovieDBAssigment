@@ -1,14 +1,8 @@
 package id.indocyber.moviedbassigment.fragment.video
 
-import android.app.AlertDialog
-import android.content.DialogInterface
-import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.PlayerConstants
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.options.IFramePlayerOptions
@@ -32,7 +26,6 @@ class VideoFragment : BaseFragment<VideoViewModel, VideoFragmentLayoutBinding>()
         vm.videoData.observe(this) {
             when (it) {
                 is AppResponse.AppResponseSuccess -> {
-                    Log.i("AppResponse", "Succes cuy")
                     val listener = object : AbstractYouTubePlayerListener() {
                         override fun onReady(youTubePlayer: YouTubePlayer) {
                             super.onReady(youTubePlayer)
@@ -60,29 +53,7 @@ class VideoFragment : BaseFragment<VideoViewModel, VideoFragmentLayoutBinding>()
                     binding.image.visibility = View.VISIBLE
                 }
                 is AppResponse.AppResponseError -> {
-                    if (it.e?.message.orEmpty().startsWith("Data")) {
-                        AlertDialog.Builder(context)
-                            .setTitle("Error")
-                            .setMessage(it.e?.message)
-                            .setPositiveButton("Kembali") { _, _ ->
-                                vm.popBackStack()
-                            }
-                            .setNegativeButton("Tutup") { dialog, _ ->
-                                dialog.cancel()
-                            }
-                            .create().show()
-                    } else if (it.e?.message.orEmpty().startsWith("Request")) {
-                        AlertDialog.Builder(context)
-                            .setTitle("Error")
-                            .setMessage(it.e?.message)
-                            .setPositiveButton("Kembali") { _, _ ->
-                                vm.popBackStack()
-                            }
-                            .setNegativeButton("Tutup") { dialog, _ ->
-                                dialog.cancel()
-                            }
-                            .create().show()
-                    }
+                    errorAlertDialog(it.e?.message.orEmpty())
                     binding.loadingBar.visibility = View.GONE
                     binding.retryButton.visibility = View.VISIBLE
                     binding.video.visibility = View.GONE

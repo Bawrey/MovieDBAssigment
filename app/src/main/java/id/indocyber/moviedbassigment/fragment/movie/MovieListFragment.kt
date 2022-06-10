@@ -1,13 +1,11 @@
 package id.indocyber.moviedbassigment.fragment.movie
 
-import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import androidx.paging.LoadState
 import dagger.hilt.android.AndroidEntryPoint
 import id.indocyber.common.base.BaseFragment
-import id.indocyber.common.entity.genre.Genre
 import id.indocyber.moviedbassigment.R
 import id.indocyber.moviedbassigment.databinding.MovieFragmentLayoutBinding
 import id.indocyber.moviedbassigment.paging.PagingLoadStateAdapter
@@ -51,7 +49,7 @@ class MovieListFragment : BaseFragment<MovieListViewModel, MovieFragmentLayoutBi
                 binding.loadingBar.visibility = View.GONE
             }
         }
-        vm.movieData.observe(this@MovieListFragment) {
+        vm.movieData.observe(this) {
             CoroutineScope(Dispatchers.Main).launch {
                 adapter.submitData(it)
             }
