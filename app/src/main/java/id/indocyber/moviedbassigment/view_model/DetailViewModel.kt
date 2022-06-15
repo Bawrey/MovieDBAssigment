@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
+import androidx.paging.cachedIn
 import dagger.hilt.android.lifecycle.HiltViewModel
 import id.indocyber.api_service.use_case.GetMovieDetailUseCase
 import id.indocyber.api_service.use_case.GetMovieReviewPagingUseCase
@@ -37,7 +38,7 @@ class DetailViewModel @Inject constructor(
     fun loadSecondData(movieId: String) {
         if (reviewData.value == null) {
             viewModelScope.launch {
-                getMovieReviewPagingUseCase.invoke(movieId).flow.collect {
+                getMovieReviewPagingUseCase.invoke(movieId).flow.cachedIn(this).collect {
                     reviewData.postValue(it)
                 }
             }
