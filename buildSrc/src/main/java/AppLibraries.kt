@@ -9,7 +9,6 @@ fun DependencyHandler.libraries() {
     daggerHilt()
     gander()
     glide()
-    googleFirebase()
     gson()
     materialDesign()
     navGraph()

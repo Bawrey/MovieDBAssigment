@@ -13,8 +13,8 @@ import id.indocyber.common.BR
 
 abstract class BaseFragment<VM : BaseViewModel, Binding : ViewDataBinding> : Fragment() {
     abstract val vm: VM
-    lateinit var binding: Binding
     abstract val layoutResourceId: Int
+    lateinit var binding: Binding
 
     override fun onCreateView(
         inflater: LayoutInflater,

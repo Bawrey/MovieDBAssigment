@@ -25,13 +25,10 @@ class GenreListAdapter(val isSelected: (Long) -> Boolean) :
         val list: AsyncListDiffer<Genre>
     ) :
         RecyclerView.ViewHolder(binding.root) {
-
         fun getItemDetails() = object : ItemDetailsLookup.ItemDetails<Long>() {
             override fun getPosition(): Int = absoluteAdapterPosition
-
             override fun getSelectionKey(): Long =
                 list.currentList[absoluteAdapterPosition].id.toLong()
-
         }
     }
 
@@ -57,11 +54,9 @@ class GenreListAdapter(val isSelected: (Long) -> Boolean) :
             override fun areItemsTheSame(oldItem: Genre, newItem: Genre): Boolean {
                 return oldItem.id == newItem.id
             }
-
             override fun areContentsTheSame(oldItem: Genre, newItem: Genre): Boolean {
                 return oldItem == newItem
             }
-
         }
     }
 

@@ -37,11 +37,9 @@ object RetrofitClient {
                             )
                         ).build()
                 }
-
             })
             .addInterceptor(GanderInterceptor(context).showNotification(true))
             .build()
-
         return Retrofit.Builder()
             .baseUrl(Constants.BASE_URL_MOVIE)
             .client(client)

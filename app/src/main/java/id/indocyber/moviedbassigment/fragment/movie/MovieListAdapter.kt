@@ -8,11 +8,10 @@ import androidx.recyclerview.widget.RecyclerView
 import id.indocyber.common.entity.movie.Movie
 import id.indocyber.moviedbassigment.databinding.MovieItemLayoutBinding
 
-class MovieListAdapter(val onClick:(String)->Unit) : PagingDataAdapter<Movie, MovieListAdapter.MovieListViewHolder>(differ) {
+class MovieListAdapter(val onClick: (String) -> Unit) :
+    PagingDataAdapter<Movie, MovieListAdapter.MovieListViewHolder>(differ) {
     class MovieListViewHolder(val binding: MovieItemLayoutBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-
-    }
+        RecyclerView.ViewHolder(binding.root)
 
     override fun onBindViewHolder(holder: MovieListViewHolder, position: Int) {
         val rowData = getItem(position)
@@ -40,7 +39,6 @@ class MovieListAdapter(val onClick:(String)->Unit) : PagingDataAdapter<Movie, Mo
             override fun areContentsTheSame(oldItem: Movie, newItem: Movie): Boolean {
                 return oldItem == newItem
             }
-
         }
     }
 }
